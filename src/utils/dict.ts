@@ -239,5 +239,11 @@ export enum DICT_TYPE {
   IOT_PRODUCT_FUNCTION_TYPE = 'iot_product_function_type', // IOT 产品功能类型
   IOT_DATA_TYPE = 'iot_data_type', // IOT 数据类型
   IOT_UNIT_TYPE = 'iot_unit_type', // IOT 单位类型
-  IOT_RW_TYPE = 'iot_rw_type' // IOT 读写类型
+  IOT_RW_TYPE = 'iot_rw_type', // IOT 读写类型
+
+   // ========== MD - MD模块  ==========
+   MD_MOVIE_TYPE='md_movie_type', // 电影类型
+   MD_MOVIE_AREA='md_movie_area', // 电影地区
+
+
 }
