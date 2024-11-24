@@ -17,31 +17,31 @@ export interface MovieVO {
 export const MovieApi = {
   // 查询影片分页
   getMoviePage: async (params: any) => {
-    return await request.get({ url: `/madou/movie/page`, params })
+    return await request.get({ url: `/md/movie/page`, params })
   },
 
   // 查询影片详情
   getMovie: async (id: number) => {
-    return await request.get({ url: `/madou/movie/get?id=` + id })
+    return await request.get({ url: `/md/movie/get?id=` + id })
   },
 
   // 新增影片
   createMovie: async (data: MovieVO) => {
-    return await request.post({ url: `/madou/movie/create`, data })
+    return await request.post({ url: `/md/movie/create`, data })
   },
 
   // 修改影片
   updateMovie: async (data: MovieVO) => {
-    return await request.put({ url: `/madou/movie/update`, data })
+    return await request.put({ url: `/md/movie/update`, data })
   },
 
   // 删除影片
   deleteMovie: async (id: number) => {
-    return await request.delete({ url: `/madou/movie/delete?id=` + id })
+    return await request.delete({ url: `/md/movie/delete?id=` + id })
   },
 
   // 导出影片 Excel
   exportMovie: async (params) => {
-    return await request.download({ url: `/madou/movie/export-excel`, params })
+    return await request.download({ url: `/md/movie/export-excel`, params })
   }
 }

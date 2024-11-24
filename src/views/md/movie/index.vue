@@ -101,7 +101,7 @@
           type="primary"
           plain
           @click="openForm('create')"
-          v-hasPermi="['madou:movie:create']"
+          v-hasPermi="['md:movie:create']"
         >
           <Icon icon="ep:plus" class="mr-5px" /> 新增
         </el-button>
@@ -110,7 +110,7 @@
           plain
           @click="handleExport"
           :loading="exportLoading"
-          v-hasPermi="['madou:movie:export']"
+          v-hasPermi="['md:movie:export']"
         >
           <Icon icon="ep:download" class="mr-5px" /> 导出
         </el-button>
@@ -154,7 +154,7 @@
             link
             type="primary"
             @click="openForm('update', scope.row.id)"
-            v-hasPermi="['madou:movie:update']"
+            v-hasPermi="['md:movie:update']"
           >
             编辑
           </el-button>
@@ -162,7 +162,7 @@
             link
             type="danger"
             @click="handleDelete(scope.row.id)"
-            v-hasPermi="['madou:movie:delete']"
+            v-hasPermi="['md:movie:delete']"
           >
             删除
           </el-button>
@@ -186,7 +186,7 @@
 import { getStrDictOptions, DICT_TYPE } from '@/utils/dict'
 import { dateFormatter } from '@/utils/formatTime'
 import download from '@/utils/download'
-import { MovieApi, MovieVO } from '@/api/madou/movie'
+import { MovieApi, MovieVO } from '@/api/md/movie'
 import MovieForm from './MovieForm.vue'
 
 /** 影片 列表 */

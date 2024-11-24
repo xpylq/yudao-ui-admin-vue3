@@ -16,7 +16,7 @@
       <el-form-item label="类型" prop="type">
         <el-select v-model="formData.type" placeholder="请选择类型">
           <el-option
-            v-for="dict in getStrDictOptions(DICT_TYPE.MADOU_MOVIE_AREA)"
+            v-for="dict in getStrDictOptions(DICT_TYPE.md_MOVIE_AREA)"
             :key="dict.value"
             :label="dict.label"
             :value="dict.value"
@@ -26,7 +26,7 @@
       <el-form-item label="地区" prop="area">
         <el-select v-model="formData.area" placeholder="请选择地区">
           <el-option
-            v-for="dict in getStrDictOptions(DICT_TYPE.MADOU_MOVIE_AREA)"
+            v-for="dict in getStrDictOptions(DICT_TYPE.md_MOVIE_AREA)"
             :key="dict.value"
             :label="dict.label"
             :value="dict.value"
@@ -54,7 +54,7 @@
 </template>
 <script setup lang="ts">
 import { getStrDictOptions, DICT_TYPE } from '@/utils/dict'
-import { MovieApi, MovieVO } from '@/api/madou/movie'
+import { MovieApi, MovieVO } from '@/api/md/movie'
 
 /** 影片 表单 */
 defineOptions({ name: 'MovieForm' })
