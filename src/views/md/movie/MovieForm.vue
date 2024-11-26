@@ -16,7 +16,7 @@
       <el-form-item label="类型" prop="type">
         <el-select v-model="formData.type" placeholder="请选择类型">
           <el-option
-            v-for="dict in getStrDictOptions(DICT_TYPE.md_MOVIE_AREA)"
+            v-for="dict in getStrDictOptions(DICT_TYPE.MD_MOVIE_TYPE)"
             :key="dict.value"
             :label="dict.label"
             :value="dict.value"
@@ -26,7 +26,7 @@
       <el-form-item label="地区" prop="area">
         <el-select v-model="formData.area" placeholder="请选择地区">
           <el-option
-            v-for="dict in getStrDictOptions(DICT_TYPE.md_MOVIE_AREA)"
+            v-for="dict in getStrDictOptions(DICT_TYPE.MD_MOVIE_AREA)"
             :key="dict.value"
             :label="dict.label"
             :value="dict.value"

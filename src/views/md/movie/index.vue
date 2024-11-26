@@ -123,14 +123,10 @@
     <el-table v-loading="loading" :data="list" :stripe="true" :show-overflow-tooltip="true">
       <el-table-column label="影片主键" align="center" prop="id" />
       <el-table-column label="关联id" align="center" prop="refId" />
-      <el-table-column label="标题" align="center" prop="title">
-        <template #default="scope">
-          <dict-tag :type="DICT_TYPE.MD_MOVIE_TYPE" :value="scope.row.title" />
-        </template>
-      </el-table-column>
+      <el-table-column label="标题" align="center" prop="title"/>
       <el-table-column label="类型" align="center" prop="type">
         <template #default="scope">
-          <dict-tag :type="DICT_TYPE.MD_MOVIE_AREA" :value="scope.row.type" />
+          <dict-tag :type="DICT_TYPE.MD_MOVIE_TYPE" :value="scope.row.type" />
         </template>
       </el-table-column>
       <el-table-column label="地区" align="center" prop="area">
