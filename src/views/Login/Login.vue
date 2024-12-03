@@ -85,10 +85,10 @@ const prefixCls = getPrefixCls('login')
 
 <style lang="scss" scoped>
 $prefix-cls: #{$namespace}-login;
-
+// #{}这是 SCSS 提供的一种语法，用于将变量的值插入到字符串中
 .#{$prefix-cls} {
   overflow: auto;
-
+  // &表示父选择器，生成后的代码为#{$prefix-cls}_left
   &__left {
     &::before {
       position: absolute;

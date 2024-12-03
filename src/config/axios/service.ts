@@ -37,6 +37,7 @@ const whiteList: string[] = ['/login', '/refresh-token']
 const service: AxiosInstance = axios.create({
   baseURL: base_url, // api 的 base_url
   timeout: request_timeout, // 请求超时时间
+  // 不会自动发送 cookies 和 Authorization 信息
   withCredentials: false // 禁用 Cookie 等信息
 })
 
@@ -52,7 +53,7 @@ service.interceptors.request.use(
       }
     })
     if (getAccessToken() && !isToken) {
-      ;(config as Recordable).headers.Authorization = 'Bearer ' + getAccessToken() // 让每个请求携带自定义token
+      (config as Recordable).headers.Authorization = 'Bearer ' + getAccessToken() // 让每个请求携带自定义token
     }
     // 设置租户
     if (tenantEnable && tenantEnable === 'true') {
