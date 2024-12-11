@@ -9,3 +9,4 @@ auto-*.d.ts
 .history
 md_admin
 md_admin.zip
+.eslintrc-auto-import.json

@@ -33,11 +33,11 @@
         <!-- 右上角的主题、语言选择 -->
         <div
           class="flex items-center justify-between at-2xl:justify-end at-xl:justify-end"
-          style="color: var(--el-text-color-primary);"
+          style="color: var(--el-text-color-primary)"
         >
           <div class="flex items-center at-2xl:hidden at-xl:hidden">
             <img alt="" class="mr-10px h-48px w-48px" src="@/assets/imgs/logo.png" />
-            <span class="text-20px font-bold" >{{ underlineToHump(appStore.getTitle) }}</span>
+            <span class="text-20px font-bold">{{ underlineToHump(appStore.getTitle) }}</span>
           </div>
           <div class="flex items-center justify-end space-x-10px h-48px">
             <ThemeSwitch />
@@ -59,6 +59,8 @@
             <RegisterForm class="m-auto h-auto p-20px lt-xl:(rounded-3xl light:bg-white)" />
             <!-- 三方登录 -->
             <SSOLoginVue class="m-auto h-auto p-20px lt-xl:(rounded-3xl light:bg-white)" />
+            <!--测试加密-->
+            <EncryptForm class="m-auto h-auto p-20px lt-xl:(rounded-3xl light:bg-white)" />
           </div>
         </Transition>
       </div>
@@ -73,8 +75,19 @@ import { useAppStore } from '@/store/modules/app'
 import { ThemeSwitch } from '@/layout/components/ThemeSwitch'
 import { LocaleDropdown } from '@/layout/components/LocaleDropdown'
 
-import { LoginForm, MobileForm, QrCodeForm, RegisterForm, SSOLoginVue } from './components'
+import {
+  LoginForm,
+  MobileForm,
+  QrCodeForm,
+  RegisterForm,
+  SSOLoginVue,
+  EncryptForm
+} from './components'
 
+/*
+  defineOptions 函数允许你通过简洁的方式设置组件的一些常见选项
+  1. name是指定组件的名称
+*/
 defineOptions({ name: 'Login' })
 
 const { t } = useI18n()

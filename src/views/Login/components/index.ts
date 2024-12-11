@@ -4,5 +4,6 @@ import LoginFormTitle from './LoginFormTitle.vue'
 import RegisterForm from './RegisterForm.vue'
 import QrCodeForm from './QrCodeForm.vue'
 import SSOLoginVue from './SSOLogin.vue'
+import EncryptForm from './EncryptForm.vue'
 
-export { LoginForm, MobileForm, LoginFormTitle, RegisterForm, QrCodeForm, SSOLoginVue }
+export {LoginForm, MobileForm, LoginFormTitle, RegisterForm, QrCodeForm, SSOLoginVue,EncryptForm }

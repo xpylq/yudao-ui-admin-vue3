@@ -6,10 +6,11 @@ export enum LoginStateEnum {
   RESET_PASSWORD,
   MOBILE,
   QR_CODE,
-  SSO
+  SSO,
+  Encrypt
 }
 
-const currentState = ref(LoginStateEnum.LOGIN)
+const currentState = ref(LoginStateEnum.Encrypt)
 
 export function useLoginState() {
   function setLoginState(state: LoginStateEnum) {

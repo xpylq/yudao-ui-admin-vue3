@@ -84,3 +84,23 @@ export const getCode = (data) => {
 export const reqCheck = (data) => {
   return request.postOriginal({ url: 'system/captcha/check', data })
 }
+
+// base64 加密测试数据
+export const base64Api = () => {
+  return request.get({ url: 'md/test/base64' })
+}
+
+// rsa 加密测试数据
+export const rsaApi = () => {
+  return request.get({ url: 'md/test/rsa' })
+}
+
+// aes 加密测试数据
+export const aesApi = () => {
+  return request.get({ url: 'md/test/aes' })
+}
+
+// aes 加密测试数据-注解
+export const aesAnnoApi = () => {
+  return request.get({ url: 'md/test/aesAnno' })
+}

@@ -119,38 +119,145 @@ export function createVitePlugins() {
         globalsPropValue: true // Default `true`, (true | false | 'readonly' | 'readable' | 'writable' | 'writeable')
       }
     }),
+    /*
+      1. 概述：
+        * 用于在 Vite 项目中自动按需导入 Vue 组件的插件，旨在减少手动导入组件的烦恼，提高开发效率。
+        * 它通过分析 .vue 文件中的组件使用情况，自动将组件按需导入，而无需显式地在每个文件中写 import 语句。
+    */
     Components({
-      // 生成自定义 `auto-components.d.ts` 全局声明
+      // 指定自动生成组件的类型声明文件的路径和名称
       dts: 'src/types/auto-components.d.ts',
-      // 自定义组件的解析器
+      // 自定义组件的解析器，这里是和ElementPlus插件集成
       resolvers: [ElementPlusResolver()],
+      /*
+        是用来指定文件匹配模式的，它通常用于定义哪些文件应该被包含在内，哪些文件应该被排除
+        1. 第一个是包含src/components中自定义组件
+        2. 第二个是排除src/components/DiyEditor/components/mobile目录下的自定义组件
+      */
       globs: ["src/components/**/**.{vue, md}", '!src/components/DiyEditor/components/mobile/**']
     }),
+    /*
+      1. 概述：旨在集成 ESLint 到 Vite 构建过程中，以便在开发过程中进行代码静态分析和检查，确保代码符合预设的代码风格、规范以及避免潜在的错误。
+      2. 插件功能
+        * 实时 lint 检查：它可以在开发过程中实时运行 ESLint，帮助开发者尽早发现代码中的问题。
+        * 与 Vite 集成：vite-plugin-eslint 作为 Vite 插件使用，能够无缝集成到 Vite 开发流程中，通常不需要额外的配置来启动 ESLint。
+        * 支持 Vue 和 TypeScript：如果你的项目中包含 Vue 文件（.vue）或 TypeScript 文件（.ts，.tsx），vite-plugin-eslint 也能够对这些文件进行 lint 检查。
+        * 支持自动修复：与 ESLint 配合使用时，可以启用自动修复功能，自动格式化代码，减少人工修复的工作量。
+    */
     EslintPlugin({
+      // 是否启用 ESLint 缓存，以提高性能。默认值为 false。
       cache: false,
+      // 用于指定哪些文件需要执行 ESLint 检查，默认情况下它会检查 src 目录下的 .js、.ts、.tsx、.vue 文件。
       include: ['src/**/*.vue', 'src/**/*.ts', 'src/**/*.tsx'] // 检查的文件
     }),
+    /*
+      1. 概述：用于集成 Vue I18n 国际化功能到 Vue 3 项目中。它通过优化 Vue I18n 的加载流程，为开发者提供按需加载、多语言支持、编译优化等功能，提升国际化开发的效率和性能。
+      2. 功能特点
+        * 简化语言包的加载流程：无需手动导入语言文件。
+        * 支持按需加载：提升性能，减少打包体积。
+        * 兼容多种语言文件格式：支持 .json 和 .yaml。
+        * 易于配置和集成：与 Vue 3 和 Composition API 无缝集成。
+    */
     VueI18nPlugin({
+      // 是否仅使用运行时模式（即不包含编译器）。开启后可以减少打包体积。默认值true
       runtimeOnly: true,
+      // 是否仅使用 Vue I18n 的 Composition API。默认值true
       compositionOnly: true,
+      /*
+        1.指定语言文件的路径，用于告诉插件从哪里加载国际化资源文件。
+        2. __dirname
+          * __dirname 是 Node.js 中的一个全局变量，它表示当前模块（文件）所在的目录的绝对路径。
+          * 在 Vite 配置中，__dirname 用来获取当前配置文件所在的目录，并结合其他路径字符串来构造绝对路径。
+          * 这里的__dirname解析为/Users/consul/workspace/backend/my/ruoyi-all/yudao-ui-admin-vue3/，然后拼接相对路径src/locales/**
+      */
       include: [resolve(__dirname, 'src/locales/**')]
     }),
+    /*
+      1. 概述
+        * 官网: https://github.com/vbenjs/vite-plugin-svg-icons/tree/main
+        * 用于优化和自动化处理 SVG 图标，将 SVG 文件作为图标使用。
+        * 这个插件主要目的是将 SVG 文件转换为 Vue 组件，并提供按需加载功能，从而让你在 Vue 项目中方便地使用 SVG 图标，提升性能并简化图标的管理。
+      2. 功能特点
+        * 按需加载 SVG 图标：只会加载你使用的图标，避免不必要的资源加载，减少应用的打包体积。
+        * 支持自动化处理 SVG 图标：无需手动编写图标组件，自动将 SVG 文件转换为 Vue 组件，简化开发流程。
+        * 灵活配置：可以自定义图标目录、SVG 组件的 ID 格式以及图标的注入方式。
+        * 提高性能：通过按需加载和优化 SVG 图标的注入位置，提升应用性能。
+      3. 项目中使用
+        * 原理：详见src/components/Icon中对其的二次封装
+        * 如何使用：
+          - <Icon :size="40" icon="svg-icon:peoples" />
+          - <Icon :size="40" icon="svg-icon:bpm-audit1" />
+
+    */
     createSvgIconsPlugin({
+      // 指定图标文件夹路径
       iconDirs: [pathResolve('src/assets/svgs')],
+      /*
+        1. 指定生成的 SVG symbol 的 ID 格式
+        2. 默认格式: icon-[name]
+        3. icon-[dir]-[name] 其中[dir]表示图标文件所在的目录名。这个目录名是相对于 iconDirs 配置项所指定的目录的相对路径。
+      */
       symbolId: 'icon-[dir]-[name]',
+      /*
+        自动使用 SVGO 的默认优化选项来优化 SVG 文件。这包括：
+          * 删除空白、注释、冗余的属性：比如移除多余的空格、title 标签、id 和 class 等。
+          * 缩小文件大小：通过压缩路径数据、优化填充属性和颜色等。
+          * 保持必要的属性：例如，默认不会删除 viewBox，因为它对于响应式的 SVG 很重要。
+      */
       svgoOptions: true
     }),
+    /*
+      1. 概述：用于自动对构建后的资源进行压缩，以减小文件大小，提升性能，尤其是对于静态资源的加载速度。这个插件支持多种压缩算法，包括 gzip、brotli 等。
+      2. 主要功能
+        * 压缩静态资源：将生成的 JS、CSS、HTML 等文件进行压缩，减小文件体积。
+        * 支持多种压缩算法：支持常见的压缩算法如 gzip、brotli 和 zlib 等。
+        * 自动生成压缩文件：在构建过程中，自动生成相应的压缩文件，并且可以根据需要自动在 HTTP 服务器中提供这些文件。
+        * 提高加载速度：压缩文件可以减少传输的数据量，提升客户端加载速度，尤其是在网络带宽有限的情况下。
+
+    */
     viteCompression({
-      verbose: true, // 是否在控制台输出压缩结果
-      disable: false, // 是否禁用
-      threshold: 10240, // 体积大于 threshold 才会被压缩,单位 b
-      algorithm: 'gzip', // 压缩算法,可选 [ 'gzip' , 'brotliCompress' ,'deflate' , 'deflateRaw']
-      ext: '.gz', // 生成的压缩包后缀
-      deleteOriginFile: false //压缩后是否删除源文件
+      // 是否在控制台输出压缩结果
+      verbose: true,
+      // 是否禁用
+      disable: false,
+      // 体积大于 threshold 才会被压缩,单位 b。10240即为10kb
+      threshold: 10240,
+      // 指定压缩算法,可选 [ 'gzip' , 'brotliCompress' ,'deflate' , 'deflateRaw']
+      algorithm: 'gzip',
+      // 生成的压缩包后缀
+      ext: '.gz',
+      //压缩后是否删除源文件
+      deleteOriginFile: false
     }),
+    /*
+      1. 概述：
+        * Vite 构建过程中集成 EJS 模板引擎的插件。
+        * EJS 是一种非常流行的 JavaScript 模板引擎，允许你在 HTML 文件中嵌入 JavaScript 代码。
+        * 通过使用这个插件，你可以在 Vite 项目中方便地处理 EJS 模板文件，动态注入数据并生成最终的 HTML 文件。
+    */
     ViteEjsPlugin(),
+    /*
+      1. 背景
+        * 在现代 JavaScript 中，await 只能在 async 函数内部使用，或者通过 Promise.then() 链式调用。
+        * 然而，随着 ECMAScript 2022（ES13）的发布，JavaScript 提供了顶级 await 语法，可以直接在模块级别使用 await，这意味着我们不再需要将异步操作包装在函数中。
+        ```js
+          // ES2022 顶级 await 示例
+          const data = await fetchData();
+          console.log(data);
+        ```
+      2. 为什么需要 vite-plugin-top-level-await？
+        * Vite 默认不支持顶级 await 语法，尤其是在使用早期版本的 JavaScript 引擎时。在许多情况下，开发者希望在模块级别直接使用 await，而无需将其包装在 async 函数中。
+        * vite-plugin-top-level-await 插件解决了这个问题，它允许你在 Vite 构建的项目中使用顶级 await，并且确保它在浏览器端或 Node.js 中正确地被处理。
+        * 配置完插件之后，你就可以在项目的任何模块中使用顶级 await：
+        ```js
+          // 代码会在模块加载时直接执行，await 会等待 fetch 返回的 Promise 解析完成后再继续执行。
+          const response = await fetch('https://api.example.com/data');
+          const data = await response.json();
+          console.log(data);
+        ```
+      3. https://juejin.cn/post/7152191742513512485
+    */
     topLevelAwait({
-      // https://juejin.cn/post/7152191742513512485
       // The export name of top-level await promise for each chunk module
       promiseExportName: '__tla',
       // The function to generate import names of top-level await promise in each chunk module
