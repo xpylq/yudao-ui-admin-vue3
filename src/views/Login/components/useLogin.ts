@@ -10,7 +10,7 @@ export enum LoginStateEnum {
   Encrypt
 }
 
-const currentState = ref(LoginStateEnum.Encrypt)
+const currentState = ref(LoginStateEnum.LOGIN)
 
 export function useLoginState() {
   function setLoginState(state: LoginStateEnum) {
