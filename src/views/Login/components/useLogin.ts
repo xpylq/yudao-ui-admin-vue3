@@ -7,7 +7,7 @@ export enum LoginStateEnum {
   MOBILE,
   QR_CODE,
   SSO,
-  Encrypt
+  ENCRYPT
 }
 
 const currentState = ref(LoginStateEnum.LOGIN)

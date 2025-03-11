@@ -81,7 +81,7 @@ import {
   QrCodeForm,
   RegisterForm,
   SSOLoginVue,
-  EncryptForm
+  EncryptForm,
 } from './components'
 
 /*

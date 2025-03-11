@@ -1,7 +1,7 @@
 import request from '@/config/axios'
 
 // 影片 VO
-export interface MovieVO {
+export interface MovieVO{
   id: number // 影片主键
   refId: number // 关联id
   title: string // 标题

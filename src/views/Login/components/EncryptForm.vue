@@ -89,7 +89,7 @@ import JSEncrypt from 'jsencrypt'
 import Encrypt from 'encryptlong'
 defineOptions({ name: 'EncryptForm' })
 const { getLoginState } = useLoginState()
-const getShow = computed(() => unref(getLoginState) === LoginStateEnum.Encrypt)
+const getShow = computed(() => unref(getLoginState) === LoginStateEnum.ENCRYPT)
 // pnpm install jsencrypt
 // pnpm install encryptlong
 // 公钥和私钥的 PEM 格式
